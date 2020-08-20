@@ -1,5 +1,4 @@
 import React from "react";
-// import Header from ""
 import {useFns, useT, useSetLang} from "./context";
 import Header from "./Header";
 

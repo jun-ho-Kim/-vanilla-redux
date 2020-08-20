@@ -1,9 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
+import translation from './translation';
+import UserContextProvider from './context';
 
 ReactDOM.render(
-    <App />,
+  <UserContextProvider defaultLang="en" translation={translation}>
+    <App/>
+  </UserContextProvider>,
   document.getElementById('root')
 );
 

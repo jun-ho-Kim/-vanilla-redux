@@ -1,4 +1,5 @@
-import React, {useState, useContext} from "react";
+import React, {useState, useContext, useReducer} from "react";
+import { reducer, initialState } from "./reducer";
 
 export const UserContext = React.createContext();
 
@@ -16,8 +17,9 @@ const UserContextProvider = ({children, defaultLang, translation}) => {
         }
     }
     const logUserIn = () => setUser({...user, loggedIn:true});
+    const [state, dispatch] = useReducer(reducer, initialState);
     return (
-        <UserContext.Provider value={{user, fn:{logUserIn}, setLang, t: hyperTranslate}}>
+        <UserContext.Provider value={{user, fn:{logUserIn}, setLang, t: hyperTranslate, state, dispatch}}>
             {children}
         </UserContext.Provider>
     )
@@ -40,5 +42,15 @@ export const useT = () => {
     const {t} = useContext(UserContext);
     return t;
 };
+
+export const useToDo = () => {
+    const {state} = useContext(UserContext);
+    return state;
+}
+
+export const useDispatch = () => {
+    const {dispatch} = useContext(UserContext);
+    return dispatch;
+}
 
 export default UserContextProvider;
